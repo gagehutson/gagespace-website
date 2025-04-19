@@ -1,0 +1,223 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>File Storage - Gagespace</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+    <style>
+        .file-list {
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .file-list h2 {
+            font-size: 22px;
+            font-weight: bold;
+            color: #4d4d4d;
+            margin-bottom: 10px;
+        }
+
+        .file-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
+            margin-bottom: 10px;
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+        }
+
+        .file-item a {
+            text-decoration: none;
+            color: #3b8ce2;
+            font-weight: 500;
+        }
+
+        .file-item a:hover {
+            text-decoration: underline;
+        }
+
+        .download-btn {
+            background-color: #007bff;
+            border: none;
+            padding: 6px 12px;
+            color: white;
+            border-radius: 4px;
+            text-decoration: none;
+        }
+
+        .download-btn:hover {
+            background-color: #0268d4;
+        }
+
+        @media (max-width: 768px) {
+            #header nav ul {
+                display: flex;
+                flex-direction: row;
+                flex-wrap: nowrap;
+                justify-content: center;
+                align-items: center;
+                gap: 4px; /* smaller gap between nav items */
+                padding: 0;
+                margin: 0;
+                overflow: hidden;
+            }
+
+            #header nav ul li {
+                font-size: 13px; /* slightly smaller font */
+                padding: 0 2px;
+                white-space: nowrap;
+            }
+
+            #header nav ul li a {
+                padding: 4px 6px; /* tighter button area */
+            }
+        }
+
+    </style>
+</head>
+<body class="is-preload">
+
+<!-- Header -->
+<header id="header">
+    <a href="index.html" class="title">Gagespace</a>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="generic.php">File Server</a></li>
+            <li><a href="file-storage.html" class="active">File Storage</a></li>
+            <li><a href="#" onclick="document.getElementById('logoutForm').submit();">Logout</a></li>
+            <form id="logoutForm" action="logout.php" method="post" style="display:none;"></form>
+        </ul>
+    </nav>
+</header>
+
+<!-- Wrapper -->
+<div id="wrapper">
+    <section id="main" class="wrapper">
+        <div class="inner">
+            <h1 class="major">File Storage</h1>
+            <p>Below is a list of files currently available on the server. Click download to retrieve a file.</p>
+
+            <div class="file-list" id="fileListContainer">
+                <h2 id="currentPath">Uploaded Files</h2>
+                <div id="fileList">
+                    <!-- Files will be dynamically inserted here -->
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script>
+    const fileList = document.getElementById("fileList");
+
+    function loadFiles(path = '') {
+        fetch(`https://gagespace.com/list-files.php?path=${encodeURIComponent(path)}`)
+            .then(response => response.json())
+            .then(data => {
+                fileList.innerHTML = ""; // Clear current list
+
+                // Update the current path heading
+                const currentPathHeading = document.getElementById("currentPath");
+                currentPathHeading.textContent = path ? `/${path}` : "Uploaded Files";
+
+
+                // Show back button if inside a folder
+                if (path !== '') {
+                    const backItem = document.createElement("div");
+                    backItem.className = "file-item";
+                    const backLink = document.createElement("a");
+                    backLink.href = "#";
+                    backLink.textContent = "⬅️ Back";
+                    backLink.onclick = () => {
+                        const parentPath = path.split('/').slice(0, -1).join('/');
+                        loadFiles(parentPath);
+                    };
+                    backItem.appendChild(backLink);
+                    fileList.appendChild(backItem);
+                }
+
+                // Show folders
+                if (data.folders && data.folders.length > 0) {
+                    data.folders.forEach(folder => {
+                        const item = document.createElement("div");
+                        item.className = "file-item";
+
+                        const folderLink = document.createElement("a");
+                        folderLink.href = "#";
+                        folderLink.innerHTML = `<i class="fa fa-folder"></i> ${folder.name}`;
+                        folderLink.onclick = () => loadFiles(folder.path);
+
+                        item.appendChild(folderLink);
+                        fileList.appendChild(item);
+                    });
+                }
+
+                // Show files
+                if (data.files && data.files.length > 0) {
+                    data.files.forEach(file => {
+                        const item = document.createElement("div");
+                        item.className = "file-item";
+
+                        const link = document.createElement("a");
+                        link.href = "/uploads/" + file.path;
+                        link.textContent = file.name;
+                        link.target = "_blank";
+
+                        const download = document.createElement("a");
+                        download.href = "/uploads/" + file.path;
+                        download.id = "download-btn";
+                        download.className = "button primary icon solid fa-download";
+                        download.textContent = "Download";
+                        download.download = file.name;
+
+
+                        item.appendChild(link);
+                        item.appendChild(download);
+                        fileList.appendChild(item);
+                    });
+                }
+
+                if ((!data.folders || data.folders.length === 0) &&
+                    (!data.files || data.files.length === 0)) {
+                    fileList.innerHTML = "<p>No files or folders found.</p>";
+                }
+            })
+            .catch(error => {
+                console.error("Error fetching files:", error);
+                fileList.innerHTML = "<p>Failed to load files.</p>";
+            });
+    }
+
+    // Load root folder on page load
+    loadFiles();
+</script>
+
+
+<!-- Footer -->
+<footer id="footer" class="wrapper alt" style="margin-top: 450px;">
+    <div class="inner">
+        <ul class="menu">
+            <li>&copy; Untitled. All rights reserved.</li><li>Designer: Gage Hutson</li>
+        </ul>
+    </div>
+</footer>
+
+<!-- Scripts -->
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/jquery.scrollex.min.js"></script>
+<script src="assets/js/jquery.scrolly.min.js"></script>
+<script src="assets/js/browser.min.js"></script>
+<script src="assets/js/breakpoints.min.js"></script>
+<script src="assets/js/util.js"></script>
+<script src="assets/js/main.js"></script>
+
+</body>
+</html>

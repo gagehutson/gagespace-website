@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="assets/css/main.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+<style>
+body {font-family: Arial, Helvetica, sans-serif;}
+
+/* Full-width input fields */
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #d6d6d6;
+  box-sizing: border-box;
+  color: #000000; /* Set text color to black */
+  background-color: #ffffff;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+  outline: none;
+  border: 1px solid #727272; /* Slightly darker to show it's active */
+  background-color: #ffffff;
+  color: #000000;
+}
+
+
+/* Set a style for all buttons */
+button {
+  background-image: -moz-linear-gradient(to right, #5e42a6, #b74e91);
+  background-image: -webkit-linear-gradient(to right, #5e42a6, #b74e91);
+  background-image: -ms-linear-gradient(to right, #5e42a6, #b74e91);
+  background-image: linear-gradient(to right, #5e42a6, #b74e91);
+  color: rgb(255, 255, 255);
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  vertical-align: middle;
+  line-height: normal;
+}
+
+button.loginbutton {
+  max-width: 250px;
+  margin: 20px auto;
+  display: block;
+  position: relative;
+  border-radius: 30px;
+  top: 0;
+  left: 0;
+}
+
+
+
+button:hover {
+  opacity: 0.98;
+}
+
+/* Center the image and position the close button */
+.imgcontainer {
+    text-align: center;
+    position: relative;
+}
+
+img.avatar {
+  width: 70px;   /* or try 80px, 60px, etc */
+  height: auto;   /* keeps the aspect ratio */
+  border-radius: 50%;  /* keeps it circular */
+  display: block;
+  margin: 0 auto; /* centers it */
+  padding-top: 30px;
+  overflow: visible;
+
+}
+
+.container {
+  padding: 16px;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+
+span.psw {
+  display: block;
+  text-align: center;
+  position: relative;
+  bottom: 35px; /* optional, to move it up */
+  right: 0;     /* remove the horizontal shift */
+  margin-top: 10px;
+  font-size: medium;
+}
+
+
+span.psw a {
+  color: #000000;
+  text-decoration: none;
+}
+
+span.psw a:hover {
+  color: #000000b7;
+  text-decoration: underline; /* optional */
+}
+
+
+/* Modal Background */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 10;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background: rgba(165, 42, 236, 0.096);
+  padding-top: 60px;
+}
+
+/* Modal Box */
+.modal-content {
+  background: #ffffff;
+  border-radius: 12px;
+  margin: 5% auto;
+  padding: 0;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+label,
+label b {
+  color: #000000 !important;
+  padding-bottom: -30px;
+}
+
+label.adjust-label {
+  position: relative;
+  bottom: -5px; /* move it up */
+  left: 15px;
+}
+
+
+
+/* The Close Button (x) */
+.close {
+  position: absolute;
+  right: 25px;
+  top: 0;
+  color: #000;
+  font-size: 35px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: red;
+  cursor: pointer;
+}
+
+
+input::placeholder {
+  color: #cccccca1 !important;
+  opacity: 1;
+}
+
+input[type="text"],
+input[type="password"] {
+  width: 340px;
+  padding: 6px 10px;
+  font-size: 14px;
+  margin: 10px auto;  /* <-- centers it horizontally */
+  display: block;     /* required for margin auto to work */
+  box-sizing: border-box;
+}
+
+
+#submit {
+  margin-top: 30px;
+  margin-bottom: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 300px;
+  border-radius: 10px;
+  display: block;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.modaltitle{
+    font-size: 30px; 
+    color: #000;
+    display: block;
+    text-align: center;
+    
+}
+.modaltitle1{
+    font-size: 15px; 
+    color: #4d4d4d;
+    display: block;
+    text-align: center;
+    margin-bottom: -9px;
+    font-style: oblique;
+}
+
+/* Add Zoom Animation */
+.animate {
+  -webkit-animation: animatezoom 0.6s;
+  animation: animatezoom 0.6s
+}
+
+@-webkit-keyframes animatezoom {
+  from {-webkit-transform: scale(0)} 
+  to {-webkit-transform: scale(1)}
+}
+  
+@keyframes animatezoom {
+  from {transform: scale(0)} 
+  to {transform: scale(1)}
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+  span.psw {
+     display: block;
+     float: none;
+  }
+}
+@media (max-width: 768px) {
+	h1.major {
+		font-size: 20px; /* or try 18px if still too big */
+		text-align: center; /* optional: centers it nicely */
+	}
+}
+@media screen and (max-width: 600px) {
+  button.loginbutton {
+    position: static;
+    margin: 20px auto;
+    display: block;
+  }
+}
+
+</style>
+</head>
+<body class="is-preload">
+
+
+        <!-- Header -->
+        <header id="header">
+            <a href="index.html" class="title">Gagespace</a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                </ul>
+            </nav>
+        </header>
+        
+        <!-- Wrapper -->
+        <div id="wrapper">
+            <section id="main" class="wrapper">
+                <div class="inner">
+                    <h1 class="major">Login to Gagespace File Server</h1>
+                </div>
+            </section>
+        </div>
+
+<button onclick="document.getElementById('id01').style.display='block'" class="loginbutton">Login</button>
+
+<div id="id01" class="modal">
+  
+  <form class="modal-content animate" action="action_page.php" method="post">
+    <div class="imgcontainer">
+        <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+        <img src="/images/login-icon.png" alt="Avatar" class="avatar">
+      </div>
+    <div class="container">
+    <h1 class="modaltitle1">Log in to</h1>
+    <h1 class="modaltitle">Gagespace</h1>
+    <label for="psw" class="adjust-label"><b>Username</b></label>
+
+      <input type="text" placeholder="Enter Username" name="uname" required>
+
+      <label for="psw" class="adjust-label"><b>Password</b></label>
+
+      <div style="position: relative;">
+        <input type="password" placeholder="Enter Password" name="psw" id="passwordInput" required>
+        <i class="fa-solid fa-eye" id="togglePassword" style="position: absolute; top: 51%; right: 30px; transform: translateY(-50%); color:#aaaaaa6e; cursor: pointer;"></i>
+      </div>
+      
+        
+      <button type="submit" id="submit">Login</button>
+    </div>
+
+    <div class="container" style="background-color:#ffffff">
+      <span class="psw"><a href="/index.html#three">Forgot password?</a></span>
+    </div>
+  </form>
+</div>
+
+<script>
+
+const togglePassword = document.getElementById('togglePassword');
+  const passwordInput = document.getElementById('passwordInput');
+
+  togglePassword.addEventListener('click', function () {
+    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+    passwordInput.setAttribute('type', type);
+    
+    // Toggle icon
+    this.classList.toggle('fa-eye');
+    this.classList.toggle('fa-eye-slash');
+  });
+
+// Get the modal
+var modal = document.getElementById('id01');
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
+<footer id="footer" class="wrapper alt" style="margin-top: 450px;">
+    <div class="inner">
+        <ul class="menu">
+            <li>&copy; Untitled. All rights reserved.</li><li>Designer: Gage Hutson</li>
+        </ul>
+    </div>
+</footer>
+</body>
+</html>

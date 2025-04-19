@@ -1,0 +1,203 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Gagespace</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css?v=3" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Sidebar -->
+			<section id="sidebar">
+				<div class="inner">
+					<nav>
+						<ul>
+							<li><a href="#intro">Welcome</a></li>
+							<li><a href="#one">Portfolio</a></li>
+							<li><a href="#two">File Server</a></li>
+							<li><a href="#three">Get in touch</a></li>
+						</ul>
+					</nav>
+				</div>
+			</section>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Intro -->
+					<section id="intro" class="wrapper style1 fullscreen fade-up">
+						<div class="inner">
+							<h1>Gagespace</h1>
+							<p>Hey there! <br /><br />This is my personal corner of the internet—a place to share, store, and connect.<br /><br />
+							Whether you're here to grab a file, drop one off, or just explore, you're in the right place.
+							Family and friends, feel free to use the File Server section to upload and download what you need.<br /><br />
+							If you have any questions, just reach out. Enjoy your stay!<br /></p>
+
+						</div>
+					</section>
+
+				<!-- One -->
+					<section id="one" class="wrapper style2 spotlights">
+						<section>
+							<div class="content">
+								<div class="inner">
+									<h2>Resume</h2>
+									<p>If you need access to my resume, please click the button below.</p>
+									<ul class="actions">
+										<li><a href="\assets\Resume\GHResume.pdf" class="button">Gage's Resume</a></li>
+									</ul>
+								</div>
+							</div>
+						</section>
+						<section>
+							<div class="content">
+								<div class="inner">
+									<h2>Certifications</h2>
+									<p>If you need to access my certifications, please click the button below.</p>
+									<ul class="actions">
+										<li><a href="https://linktr.ee/gagehutson" class="button">Gage's Certifications</a></li>
+									</ul>
+								</div>
+							</div>
+						</section>
+						<section>
+							<div class="content">
+								<div class="inner">
+									<h2>Projects</h2>
+									<p>If you need access to my projects, please click the button below to be redirected to my GitHub.</p>
+									<ul class="actions">
+										<li><a href="https://github.com/gagehutson" class="button">Gage's GitHub</a></li>
+									</ul>
+								</div>
+							</div>
+						</section>
+					</section>
+
+				<!-- Two -->
+					<section id="two" class="wrapper style3 fade-up">
+						<div class="inner">
+							<h2>File Server</h2>
+							<p>The point of this server is to allow friends and family to transfer files without slow download speeds or limited space. <br /> 
+								To visit the file server please click the <a href="generic.php">button</a> below. For access please <a href="#three">contact me</a> for an account.</p>
+							
+								<ul class="actions">
+									<li><a href="login.html" class="button">File Server</a></li>
+								</ul>
+							<div class="features">
+								<section>
+									<span class="icon solid major fa-code"></span>
+									<h3>PHP</h3>
+									<p>I chose PHP for the backend because it's lightweight, easy to integrate with web servers like Apache, and well-suited for handling file uploads, authentication, and sessions. 
+										Since I am using apache on my raspberry pi and it supports PHP, it made sense to use it for dynamic file management.</p>
+								</section>
+								<section>
+									<span class="icon solid major fa-lock"></span>
+									<h3>Security</h3>
+									<p>To restrict access, I created a simple authentication system with predefined logins stored securely in a PHP file. 
+										This ensures that only authorized users (family and friends) can upload or download files, preventing unauthorized access.</p>
+								</section>
+								<section>
+									<span class="icon solid major fa-cog"></span>
+									<h3>Configuration</h3>
+									<p>I set up a Raspberry Pi as a file web server running a LAMP stack (Linux, Apache, MySQL, PHP). 
+										Apache serves the web interface, PHP handles file uploads, and MySQL (or a simple PHP file) manages user authentication. 
+										File permissions were configured to ensure proper read/write access.</p>
+								</section>
+								<section>
+									<span class="icon solid major fa-desktop"></span>
+									<h3>Hardware</h3>
+									<p>I used a Raspberry Pi 4B because it’s low-power, cost-effective, and ideal for self-hosting small-scale web applications. 
+										An external USB drive provides SSD storage, and it’s connected to my home network for quick and easy access.</p>
+								</section>
+								<section>
+									<span class="icon solid major fa-link"></span>
+									<h3>Linking</h3>
+									<p>Since my Raspberry Pi is on my local network, I used cloudflare to securely tunnel my ip to my domain name to host the front-end site. 
+										It connects to my Raspberry Pi via this domain. 
+										This setup keeps my storage separate from the public-facing web interface allowing me to access my physical storage.</p>
+								</section>
+								<section>
+									<span class="icon major fa-gem"></span>
+									<h3>Cost</h3>
+									<li>Raspberry Pi 4B: $50</li>
+									<li>Storage (SSD): $60</li>
+									<li>Web Server hosting: $0</li>
+									<li>Domain: $1</li>
+									<li>Total Cost: $111 </li>
+									<p>For a self-hosted, secure, and flexible storage solution. Free for family & friends!</p>
+								</section>
+							</div>
+
+						</div>
+					</section>
+
+				<!-- Three -->
+					<section id="three" class="wrapper style1 fade-up">
+						<div class="inner">
+							<h2>Get in touch</h2>
+							<p>If you need to get in contact with me you can provide a name, email, and message and I will get back to you ASAP.</p>
+							<div class="split style1">
+								<section>
+									<form action="https://formspree.io/f/movelqyg" method="POST">
+										<div class="fields">
+										  <div class="field half">
+											<label for="name">Name</label>
+											<input type="text" name="name" id="name" required />
+										  </div>
+										  <div class="field half">
+											<label for="email">Email</label>
+											<input type="email" name="email" id="email" required />
+										  </div>
+										  <div class="field">
+											<label for="message">Message</label>
+											<textarea name="message" id="message" rows="5" required></textarea>
+										  </div>
+										</div>
+										<ul class="actions">
+										  <li><button type="submit" class="button submit">Send Message</button></li>
+										</ul>
+									  </form>
+								</section>
+								<section>
+											<h3>Social</h3>
+											<ul class="icons">
+												<li><a href="https://linktr.ee/gagehutson" class="icon brands">
+													<i class="fa-solid fa-link"></i><span class="label">Linktree</span></a></li>
+												<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+												<li><a href="https://github.com/gagehutson" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+												<li><a href="https://www.instagram.com/gage.hutson/" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+												<li><a href="https://www.linkedin.com/in/gage-hutson-97bb74226/" class="icon brands fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
+											</ul>
+										</li>
+									</ul>
+								</section>
+							</div>
+						</div>
+					</section>
+
+			</div>
+
+		<!-- Footer -->
+			<footer id="footer" class="wrapper style1-alt" >
+				<div class="inner">
+					<ul class="menu">
+						<li>&copy; Untitled. All rights reserved.</li><li>Designer: Gage Hutson</li>
+					</ul>
+				</div>
+			</footer>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
